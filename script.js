@@ -36,7 +36,7 @@ $('#btnGenerate').on('click', function () {
 			$('#data').empty();
 			setItem = mapSets.length-1;
 			var responseCheck = 1;
-			var mapsetInfoTimer = setInterval(getMapsetData, 1000);
+			var mapsetInfoTimer = setInterval(getMapsetData, 2000);
 			var responseCheckTimer = setInterval(responseCheckFunc, 100);
 			function getMapsetData(){
 				var mapSet = mapSets[setItem];
