@@ -18,7 +18,7 @@ $('#btnGenerate').on('click', function () {
 	console.log("Set values apiKEY: "+apiKEY+" | minDiff: "+minDiff+" | maxDiff: "+maxDiff);
 	var starRange = "("+minDiff+","+maxDiff+")";
 	console.log("Star range: "+starRange);
-	$.get('https://cors-anywhere.herokuapp.com/https://osusearch.com/random/', { statuses: "Ranked,Qualified", modes: "Standard", star: starRange })
+	$.get('https://cors-anywhere.herokuapp.com/https://osusearch.com/random/', { statuses: "Ranked", modes: "Standard", star: starRange })
 		.done(function(response){
 			console.log("Got response!");
 			$('#data').append(response);
@@ -45,7 +45,7 @@ $('#btnGenerate').on('click', function () {
 				$.get('https://osu.ppy.sh/api/get_beatmaps', { k: apiKEY, s: mapSet, m: 0, }).done(function(response){
 					console.log("Got response with "+response.length+" beatmaps");
 					for (var i = response.length - 1; i >= 0; i--) {
-						if(response[i].difficultyrating >= minDiff && response[i].difficultyrating <= maxDiff){beatMapsData.push(response[i])}
+						if(response[i].approved === 1){if(response[i].difficultyrating >= minDiff && response[i].difficultyrating <= maxDiff){beatMapsData.push(response[i])}}
 					}
 					responseCheck += 1;
 				});
