@@ -58,6 +58,7 @@ $('#btnGenerate').on('click', function () {
 						});
 						if (mapSetCycle === 20) {
 							clearInterval(mapsetInfoTimer);
+							responseCheck = mapSets.length;
 						}
 					}
 					function responseCheckFunc(){
