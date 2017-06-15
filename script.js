@@ -38,6 +38,7 @@ $('#btnGenerate').on('click', function () {
 					console.log("Got "+mapSets.length+" Mapsets");
 					$('#data').empty();
 					setItem = mapSets.length-1;
+					var mapSetCycle = 0;
 					var responseCheck = 1;
 					var mapsetInfoTimer = setInterval(getMapsetData, 1500);
 					var responseCheckTimer = setInterval(responseCheckFunc, 100);
@@ -48,11 +49,14 @@ $('#btnGenerate').on('click', function () {
 						$.get('https://osu.ppy.sh/api/get_beatmaps', { k: apiKEY, s: mapSet, m: 0, }).done(function(response){
 							console.log("Got response with "+response.length+" beatmaps");
 							for (var i = response.length - 1; i >= 0; i--) {
-								if(response[i].difficultyrating >= minDiff && response[i].difficultyrating <= maxDiff && response[i].approved === "1"){beatMapsData.push(response[i])}
+								if(response[i].difficultyrating >= minDiff && response[i].difficultyrating <= maxDiff && response[i].approved === "1"){
+									beatMapsData.push(response[i]);
+									mapSetCycle += 1;
+								}
 							}
 							responseCheck += 1;
 						});
-						if (setItem === 0) {
+						if (mapSetCycle === 20) {
 							clearInterval(mapsetInfoTimer);
 						}
 					}
